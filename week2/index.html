@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>DeadDrop</title>
-	<link rel="apple-touch-icon" href="appicon.png" />
-	<link rel="apple-touch-startup-image" href="startup.png">
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black">
-	<meta name="viewport" content="width=device-width, user-scalable=no">
+	<head>
+		<title>DeadDrop</title>
+		<link rel="apple-touch-icon" href="appicon.png" />
+		<link rel="apple-touch-startup-image" href="startup.png">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="viewport" content="width=device-width, user-scalable=no">
+		
+		<link href="style.css" rel="stylesheet" type="text/css">
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+	</head>
 
-	<link href="style.css" rel="stylesheet" type="text/css">
-</head>
+	<body>
+	<style>
+	
+	</style>		<!-- This is the top bit with the image. 
+		I wonder why there's no image tag here? -->
+		<div class="whitebit"></div>
 
 <body>
 			<!-- This is the top bit with the image. 
@@ -20,54 +28,57 @@
 	<div class="bottombit">
 		<p class="explanation">Intrepid spy, your next dead drop location is 37.4258709,-122.1712977.</p>
 		<div id="button">Refresh GPS: <div id="timer"></div></div>
+			<div class="area">
+				<div class="box box1"><div class="latitude">Blah</div></div>
+				<div class="box box2"><div class="longitude"></div></div>
+			</div>
 
 		<div class="area">
 			<div class="box box1"><div class="latitude"></div></div>
 			<div class="box box2"><div class="longitude"></div></div>
 		</div>
-
-	</div>
-
-	<!-- Let's put in a timer here -->
-	<script type="text/javascript">
-	var count = 10;
-	var counter = setInterval(timer, 1000); 
-
-	function timer() {
-		count = count - 1;
-		if (count <= 0) {
-			clearInterval(counter);
-			alert("Boom!");
-			document.getElementById('button').style.visibility = 'hidden';
-			return;
+</body>
+		<!-- Let's put in a timer here -->
+		<script type="text/javascript">
+		var count = 30;
+		var counter = setInterval(timer, 1000); 
+		
+		function timer() {
+		    count = count - 1;
+		    if (count <= 0) {
+		        clearInterval(counter);
+		        alert("Boom!");
+		        document.getElementById('button').style.visibility = 'hidden';
+		        return;
+		    }
+		
+		    document.getElementById("timer").innerHTML = count + " secs";
 		}
 
-		document.getElementById("timer").innerHTML = count + " secs";
-	}
-	</script>
+		</script>
+		
+		<!-- Let's put in the geolocation stuff here -->
+		<script type="text/javascript">
+		$(function () {
+    $("#button").click(function () {
+        getLocation();
+    });
+});
 
-	<!-- Let's put in the geolocation stuff here -->
-	<script type="text/javascript">
-	$(function () {
-	    $("#button").click(function () {
-	        getLocation();
-	    });
-	});
+function getLocation() {
+    if (navigator.geolocation) {
+       navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
+}
 
-	function getLocation() {
-	    if (navigator.geolocation) {
-	       navigator.geolocation.getCurrentPosition(showPosition);
-	    } else {
-	        alert("Geolocation is not supported by this browser.");
-	    }
-	}
+function showPosition(position) {
+    $(".box1").html(position.coords.latitude);
+    $(".box2").html(position.coords.longitude);
+} 
 
-	function showPosition(position) {
-	    alert(position.coords.latitude);
-	    alert(position.coords.longitude);
-	}
-	</script>
-
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-</body>
+getLocation();
+		</script>
+	</body>
 </html>
