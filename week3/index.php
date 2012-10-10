@@ -13,6 +13,28 @@
 
 	<body>
 	
+	<?php
+	include("menu.php");
+	?>
+
+	<?php
+	include("config.php");
+	$query = "";
+	$result = mysql_query($query);
+	while ($row = mysql_fetch_assoc($result)) {
+
+	}
+	?>
+
+	<form action="submit.php" method="post">
+	<label>Name: <input class="forminput" type="text" name="name" /></label>
+	<label>Email: <input class="forminput" type="text" name="email" autocapitalize="off" /></label>
+	<select name="book">
+	<option value=””></option>
+	</select>
+	<input type="submit" class="medium red awesome" value="Order &raquo;" />
+	</form>
+	
 		<div class="banner"></div>
 		
 		<table>
