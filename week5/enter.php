@@ -31,7 +31,7 @@
 		
 		<?php
 		// This is a hack. You should connect to a database here.
-		if ($_POST["username"] == "oi") {
+		if ($_POST["username"] == "test") {
 			?>
 			<script type="text/javascript">
 				// Save the username in local storage. That way you
